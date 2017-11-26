@@ -12,7 +12,7 @@ The purpose of this simulation is to examine the average waiting time for the cu
 ### Hypothesis before running the simulation:
 
 With a faster rate of entering the number of items (orders from customer) we will see that more number of customers are served per min. Thus, the restaurant should increase the number of cashiers in order to increase the rate of entering the number of items (orders from customer). This will eventually minimize the customer's waiting time.
-## Sources Used:
+
 ### Simulation's variables of uncertainty. 
 List and describe your simulation's variables of uncertainty (where you're using pseudo-random number generation). 
 For each such variable, how did you decide the range and which probability distribution to use?  
