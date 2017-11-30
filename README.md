@@ -9,8 +9,8 @@
 Fast food restaurants are popular among price-sensitive youths and working adults who runs short of time and expects to receive service quickly. Moreover, the promotional lunch meals attract good response, resulting in occasional long queues and inconvenient waiting times. Thus, a simulation model can be used to analyze the system in a fast-food restaurant. For this project, I have taken a restaurant located on the Green Street (Which Which). The purpose of this simulation is to examine the average waiting time for the customer’s turn and based on the results, determine the serving rate in order to reduce the waiting time. This will help to improve customer service, with reference to reducing waiting time in the queue and shortening queue length by adding one more cashier to improve customer wait time.
 ### Hypothesis before running the simulation:
 
-Null Hypothesis: There is no association between the number of customers served and the rate of entering the number of items by the cashier.
-Alternate Hypothesis:  There is an association between the number of customers served and the rate of entering the number of items by the cashier.
+Null Hypothesis: There is no association between the customer's waiting time and the rate of entering the number of items by the cashier.
+Alternate Hypothesis:  There is an association between the customer's waiting time and the rate of entering the number of items by the cashier.
 
 With a faster rate of entering the number of items (orders from customer) by the cashier, we should see that more number of customers are served per min. Thus, the conclusion from this study is that the restaurant should increase the number of cashiers in order to increase the rate of entering the number of items (orders from customer). This will eventually minimize the customer's waiting time. 
 
