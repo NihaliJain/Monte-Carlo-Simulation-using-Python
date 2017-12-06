@@ -22,6 +22,6 @@ Do you think it's a good representation of reality?
 To model this situation, I considered 3 customers served per min on average. This means that on average there will be one customer every 20 seconds. For every second we can simulate the chance that a customer comes by generating a random number between 1 and 20. If the number is 20, this means a customer is at the counter to be served. Also, customers may order from 1 to 10 items. If each item from 1 to 10 is equally likely, then the items taken by each customer can be simulated using a random number between 1 and 10 inclusive. This modeling is based on my observations of people served every minute at Which Which restaurant.  And yes, I think it's a good representation of reality. 
 ## Instructions on how to use the program:
 
-Run the simulation giving two parameters, first, time frame and second, the number of items (entered by the cashier) per min. By adjusting the number of items per min and running the trials again for the same time frame, with a faster rate of entering the number of items (orders from customer) we will see that more number of customers are served per min.
+Run the simulation giving two parameters, first, time framefor the simulaton and second, the number of items (entered by the cashier) per min. By adjusting the number of items per min and running the trials again for the same time frame, with a faster rate of entering the number of items (orders from customer) we will see that more number of customers are served per min.
 ## Sources Used:
 Modeled my own observations.
