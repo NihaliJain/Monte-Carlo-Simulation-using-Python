@@ -10,8 +10,10 @@ Fast food restaurants are popular among price-sensitive youths and working adult
 
 ### Hypothesis before running the simulation:
 
-Null Hypothesis: There is no association between the customer's waiting time and the rate of number of items entered by the cashier.
-Alternate Hypothesis:  There is an association between the customer's waiting time and the rate of number of items entered by the cashier.
+######Null Hypothesis:
+There is no association between the customer's waiting time and the rate of number of items entered by the cashier.
+######Alternate Hypothesis:  
+There is an association between the customer's waiting time and the rate of number of items entered by the cashier.
  
 
 ### Simulation's variables of uncertainty. 
