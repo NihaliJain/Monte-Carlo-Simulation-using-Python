@@ -7,18 +7,23 @@ import matplotlib.pyplot as plt
 
 class Queue:
     def __init__(self):
+        """ create an empty queue """
         self.items = []
 
     def isEmpty(self):
+        '''Check if there is passengers in the current waiting queue'''
         return self.items == []
 
     def enqueue(self, item):
+        ''' add new passenger to the end of queue'''
         self.items.insert(0, item)
 
     def dequeue(self):
+        '''remove the passenger from the beginning of the queue'''
         return self.items.pop()
 
     def size(self):
+        '''return the number of items in the queue'''
         return len(self.items)
 
 
@@ -32,12 +37,14 @@ class Customers_to_be_Served:
         5
         '''
         self.Customer_arrival_time = time
-        self.item = random.randrange(1, 11)
+        self.item = random.randrange(1, 11) #generates a random number between 1 and 10 (customer can order between 1 to 10 items)
 
     def getTime(self):
+        '''returns customer arrival time'''
         return self.Customer_arrival_time
 
     def getItem(self):
+        '''returns the number of items ordered depending on the random number generated'''
         return self.item
 
     def waitTime(self, Serve_Time):
@@ -57,21 +64,18 @@ class Cashier_serving_Customer:
         :param itemspm:Items entered by the cashier per minute
         '''
 
-        self.rate = itemspm
+        self.rate = itemspm  #serving rate(items entered by the cashier per min)
         self.currentCustomer = None
         self.timeRemaining = 0
 
     def setIdle(self):
         if self.currentCustomer != None:
             self.timeRemaining = self.timeRemaining - 1 #if the customer at the counter takes one second to leave the counter  subtract that 1 second)
-            if self.timeRemaining <= 0:
-                '''the time that customer is taking at the counter becomes zero when the random number generating 
-                the number of items ordered by the customer becomes zero. And at this point the customer has been served 
-                and the cashier is ready to serve other customer.
-                '''
+            if self.timeRemaining <= 0: #At this point the customer has been served and the cashier is ready to serve other customer.
                 self.currentCustomer = None
 
     def busy(self):
+        '''Returns a boolean True if there is a customer at the counter and cashier is busy with him/her.'''
         if self.currentCustomer != None:
             return True
         else:
@@ -88,7 +92,9 @@ class Cashier_serving_Customer:
 
 
 def new_Customer():
-
+    '''Generates a random number between 1 and 20 and store it in variable Cust. When the random number generated is 20 that means a customer has arrived
+     at the restaurant and can either be in the queue or at the counter (if cashier is not busy).
+    The function thus returns a boolean True upon customer's arrival.'''
     Cust = random.randrange(1, 21)
     if Cust == 20:
         return True
@@ -103,25 +109,25 @@ def simulation(numSec, itemsPermin):
     :param itemsPermin: Items entered by the cashier per min
     :return: average waiting time and the number of customers
     '''
-    restCashier = Cashier_serving_Customer(itemsPermin)
-    waitingTimes = []
+    restCashier = Cashier_serving_Customer(itemsPermin) #creating object of class Cashier_serving_Customer
+    waitingTimes = [] # list for storing wait time of each customer
     q = Queue()
 
     for currentSec in range(numSec):
-        #When the customer has arrived at the restaurant
+        #When the customer has arrived at the restaurant and is pushed into the queue
         if new_Customer():
             serving = Customers_to_be_Served(currentSec)
             q.enqueue(serving)
         #When the customer at the counter has been served
         if (not restCashier.busy()) and (not q.isEmpty()):
             nextCust = q.dequeue()
-            waitingTimes.append(nextCust.waitTime(currentSec))
+            waitingTimes.append(nextCust.waitTime(currentSec)) #calculates the wait time and appends it to the list waitingTimes
             restCashier.Next(nextCust) #calculates the time that the current customer is taking at the counter
         restCashier.setIdle()#current customer has now left and the cashier is available to serve the next customer
 
-    averageWaitingTime = sum(waitingTimes) / len(waitingTimes)
+    averageWaitingTime = sum(waitingTimes) / len(waitingTimes)#calculates average waiting time
 
-    plt.plot(itemsPermin,averageWaitingTime,'bo')
+    plt.plot(itemsPermin,averageWaitingTime,'bo')#plot between the rate of items entered per min and the average waiting time
 
 
 
