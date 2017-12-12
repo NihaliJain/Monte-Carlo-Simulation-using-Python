@@ -1,8 +1,7 @@
 import random
 import matplotlib
 import matplotlib.pyplot as plt
-
-
+import math
 
 
 class Queue:
@@ -28,7 +27,6 @@ class Queue:
 
 
 class Customers_to_be_Served:
-
     def __init__(self, time):
         '''
         :param time: Customer arrival time
@@ -37,7 +35,8 @@ class Customers_to_be_Served:
         5
         '''
         self.Customer_arrival_time = time
-        self.item = random.randrange(1, 11) #generates a random number between 1 and 10 (customer can order between 1 to 10 items)
+        self.item = random.randrange(1,
+                                     11)  # generates a random number between 1 and 10 (customer can order between 1 to 10 items)
 
     def getTime(self):
         '''returns customer arrival time'''
@@ -64,14 +63,14 @@ class Cashier_serving_Customer:
         :param itemspm:Items entered by the cashier per minute
         '''
 
-        self.rate = itemspm  #serving rate(items entered by the cashier per min)
+        self.rate = itemspm  # serving rate(items entered by the cashier per min)
         self.currentCustomer = None
         self.timeRemaining = 0
 
     def setIdle(self):
         if self.currentCustomer != None:
-            self.timeRemaining = self.timeRemaining - 1 #if the customer at the counter takes one second to leave the counter  subtract that 1 second)
-            if self.timeRemaining <= 0: #At this point the customer has been served and the cashier is ready to serve other customer.
+            self.timeRemaining = self.timeRemaining - 1  # if the customer at the counter takes one second to leave the counter  subtract that 1 second)
+            if self.timeRemaining <= 0:  # At this point the customer has been served and the cashier is ready to serve other customer.
                 self.currentCustomer = None
 
     def busy(self):
@@ -109,41 +108,68 @@ def simulation(numSec, itemsPermin):
     :param itemsPermin: Items entered by the cashier per min
     :return: average waiting time and the number of customers
     '''
-    restCashier = Cashier_serving_Customer(itemsPermin) #creating object of class Cashier_serving_Customer
-    waitingTimes = [] # list for storing wait time of each customer
+    restCashier = Cashier_serving_Customer(itemsPermin)  # creating object of class Cashier_serving_Customer
+    waitingTimes = []  # list for storing wait time of each customer
     q = Queue()
 
     for currentSec in range(numSec):
-        #When the customer has arrived at the restaurant and is pushed into the queue
+        # When the customer has arrived at the restaurant and is pushed into the queue
         if new_Customer():
             serving = Customers_to_be_Served(currentSec)
             q.enqueue(serving)
-        #When the customer at the counter has been served
+        # When the customer at the counter has been served
         if (not restCashier.busy()) and (not q.isEmpty()):
             nextCust = q.dequeue()
-            waitingTimes.append(nextCust.waitTime(currentSec)) #calculates the wait time and appends it to the list waitingTimes
-            restCashier.Next(nextCust) #calculates the time that the current customer is taking at the counter
-        restCashier.setIdle()#current customer has now left and the cashier is available to serve the next customer
+            waitingTimes.append(nextCust.waitTime(
+                currentSec))  # calculates the wait time for each customer and appends it to the list of waitingTimes
+            restCashier.Next(nextCust)  # calculates the time that the current customer is taking at the counter
+        restCashier.setIdle()  # current customer has now left and the cashier is available to serve the next customer
 
-    averageWaitingTime = sum(waitingTimes) / len(waitingTimes)#calculates average waiting time
+    averageWaitingTime = sum(waitingTimes) / len(waitingTimes)  ##calculates average waiting time
 
-    plt.plot(itemsPermin,averageWaitingTime,'bo')#plot between the rate of items entered per min and the average waiting time
+    return averageWaitingTime
 
 
+def main():
+    time_frame = 600
 
-    print("%3d Customers are left for serving and average waiting time for customer is %3.2f secs." %(q.size(),averageWaitingTime))
 
-print("Simulation output taking time frame of 600 seconds and 10 items per min are entered by the cashier")
-for i in range(10):
-    simulation(600, 10)
-print("Simulation output for same time frame but now taking  50 items per min are entered by the cashier")
-for i in range(10):
-    simulation(600, 50)
+    maxTime = []
+    avgTime = []
+    minTime = []
 
-#So, the result of this simulation rejects the null hypothesis in favour of alternate hypothesis.
+    for itemsPerMinute in range(10, 51, 1):
+        maxWaitTime = 0
+        minWaitTime = math.inf
+        totalWaitTime = 0
+        for i in range(10):
+            waitingTime = simulation(time_frame, itemsPerMinute)
+            maxWaitTime = max(maxWaitTime, waitingTime)
+            minWaitTime = min(minWaitTime, waitingTime)
+            totalWaitTime += waitingTime
+        maxTime.append(maxWaitTime)
+        minTime.append(minWaitTime)
+        avgTime.append(totalWaitTime / 100)
+        print("Simulation output taking time frame of 600 seconds and %d items per min are entered by the cashier" % (itemsPerMinute))
+        print("Maximum Average Waiting Time for the customer : %3.2f" % maxWaitTime)
+        print("Minimum Average Waiting Time for the customer  : %10.10f " % minWaitTime)
+        print("Average Time for the whole simulation : %3.2f" % (totalWaitTime / 10))
 
-#Plot to see the difference in the results of the simulation clearly
-plt.xlabel('Items entered by the cashier per min')
-plt.ylabel('Average wait time for the customer')
-plt.title("Plot comparing the two simulation results in more better way")
-plt.show()
+    plt.plot(range(10, 51, 1), maxTime, label='Best case (Maximum) Average waiting time')
+    plt.plot(range(10, 51, 1), avgTime, label='Average case for the simulation')
+    plt.plot(range(10, 51, 1), minTime, label='Worst case (Minimum) Average waiting time')
+
+    plt.legend(loc='upper right')
+
+    #So, the result of this simulation rejects the null hypothesis in favour of alternate hypothesis.
+
+    #Plot to see the difference in the results of the simulation clearly
+    plt.xlabel('Items entered by the cashier per min')
+    plt.ylabel('Average wait time for the customer (in sec)')
+    plt.title("Plot visualizing the comparison between the best, average and worst case of simulation results")
+
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
