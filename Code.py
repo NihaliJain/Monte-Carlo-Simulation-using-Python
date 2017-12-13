@@ -132,17 +132,24 @@ def simulation(numSec, itemsPermin):
 
 def main():
     time_frame = 600
-
-
+    '''
+    taking a fixed time frame of 600 seconds to visualize simulation 
+    results within this time frame by changing the number of items entered by the cashier (per min).
+    '''
+    #initializing variables
     maxTime = []
     avgTime = []
     minTime = []
 
-    for itemsPerMinute in range(10, 51, 1):
+    for itemsPerMinute in range(10, 51, 1): #taking items per min in range 10 through 50
         maxWaitTime = 0
         minWaitTime = math.inf
         totalWaitTime = 0
         for i in range(10):
+            '''
+            running 10 simulations each time (for different number of items per min) and calculating the best, average and the worst case 
+            among those 10 simulations everytime.
+            '''
             waitingTime = simulation(time_frame, itemsPerMinute)
             maxWaitTime = max(maxWaitTime, waitingTime)
             minWaitTime = min(minWaitTime, waitingTime)
@@ -150,26 +157,26 @@ def main():
         maxTime.append(maxWaitTime)
         minTime.append(minWaitTime)
         avgTime.append(totalWaitTime / 100)
-        print("Simulation output taking time frame of 600 seconds and %d items per min are entered by the cashier" % (itemsPerMinute))
-        print("Maximum Average Waiting Time for the customer : %3.2f" % maxWaitTime)
-        print("Minimum Average Waiting Time for the customer  : %10.10f " % minWaitTime)
-        print("Average Time for the whole simulation : %3.2f" % (totalWaitTime / 10))
+        print("On running 10 simulations for time frame of 600 seconds and %d items per min (entered by the cashier):" % (itemsPerMinute))
+        print("The maximum, minimum and the average case among those 10 simulation outputs are:")
+        print("Maximum Average Waiting Time for the customer (in seconds) : %3.2f" % maxWaitTime)
+        print("Minimum Average Waiting Time for the customer (in seconds)  : %10.10f " % minWaitTime)
+        print("Average of all the outputs from 10 simulations (in seconds) : %3.2f" % (totalWaitTime / 10))
+        print("\n")
 
+    #Plot to see the difference in the results of the simulation clearly
     plt.plot(range(10, 51, 1), maxTime, label='Best case (Maximum) Average waiting time')
     plt.plot(range(10, 51, 1), avgTime, label='Average case for the simulation')
     plt.plot(range(10, 51, 1), minTime, label='Worst case (Minimum) Average waiting time')
 
     plt.legend(loc='upper right')
-
-    #So, the result of this simulation rejects the null hypothesis in favour of alternate hypothesis.
-
-    #Plot to see the difference in the results of the simulation clearly
+    #Plot labeling
     plt.xlabel('Items entered by the cashier per min')
     plt.ylabel('Average wait time for the customer (in sec)')
     plt.title("Plot visualizing the comparison between the best, average and worst case of simulation results")
-
     plt.show()
 
+    # So, the result of this simulation rejects the null hypothesis in favour of alternate hypothesis.
 
 if __name__ == "__main__":
     main()
