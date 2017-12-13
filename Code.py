@@ -145,7 +145,7 @@ def main():
         maxWaitTime = 0
         minWaitTime = math.inf
         totalWaitTime = 0
-        for i in range(10):
+        for i in range(10): #taking 10 simulations
             '''
             running 10 simulations each time (for different number of items per min) and calculating the best, average and the worst case 
             among those 10 simulations everytime.
