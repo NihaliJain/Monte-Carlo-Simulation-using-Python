@@ -131,15 +131,15 @@ def simulation(numSec, itemsPermin):
 
 
 def main():
-    time_frame = 600
     '''
-    taking a fixed time frame of 600 seconds to visualize simulation 
+    taking a fixed time frame of 600 seconds to visualize simulation
     results within this time frame by changing the number of items entered by the cashier (per min).
     '''
-    #initializing variables
-    maxTime = []
-    avgTime = []
-    minTime = []
+    time_frame = 600
+    '''storing the outputs in order to make the plot'''
+    maxTime = [] #stores the maximum average waiting time among all 10 simulations for each case[items per min in (10,11,12,.....till 50)]
+    minTime = [] #stores the minimum average waiting time among all 10 simulations for each case[items per min in (10,11,12,.....till 50)]
+    avgTime = [] #stores the average for each case[items per min in (10,11,12,.....till 50)]
 
     for itemsPerMinute in range(10, 51, 1): #taking items per min in range 10 through 50
         maxWaitTime = 0
