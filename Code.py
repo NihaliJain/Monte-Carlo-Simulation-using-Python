@@ -174,6 +174,7 @@ def main():
     plt.xlabel('Items entered by the cashier per min')
     plt.ylabel('Average wait time for the customer (in sec)')
     plt.title("Plot visualizing the comparison between the best, average and worst case of simulation results")
+    #10 simulations every time on changing the number of items entered per min, for time frame of 600 seconds"
     plt.show()
 
     # So, the result of this simulation rejects the null hypothesis in favour of alternate hypothesis.
