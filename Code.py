@@ -156,7 +156,7 @@ def main():
             totalWaitTime += waitingTime
         maxTime.append(maxWaitTime)
         minTime.append(minWaitTime)
-        avgTime.append(totalWaitTime / 100)
+        avgTime.append(totalWaitTime / 10)
         print("On running 10 simulations for time frame of 600 seconds and %d items per min (entered by the cashier):" % (itemsPerMinute))
         print("The maximum, minimum and the average case among those 10 simulation outputs are:")
         print("Maximum Average Waiting Time for the customer (in seconds) : %3.2f" % maxWaitTime)
