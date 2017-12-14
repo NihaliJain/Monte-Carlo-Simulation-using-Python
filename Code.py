@@ -35,8 +35,7 @@ class Customers_to_be_Served:
         5
         '''
         self.Customer_arrival_time = time
-        self.item = random.randrange(1,
-                                     11)  # generates a random number between 1 and 10 (customer can order between 1 to 10 items)
+        self.item = random.randrange(1,11)  # generates a random number between 1 and 10 (customer can order between 1 to 10 items)
 
     def getTime(self):
         '''returns customer arrival time'''
@@ -91,9 +90,11 @@ class Cashier_serving_Customer:
 
 
 def new_Customer():
-    '''Generates a random number between 1 and 20 and store it in variable Cust. When the random number generated is 20 that means a customer has arrived
+    '''
+     Generates a random number between 1 and 20 and store it in variable Cust. When the random number generated is 20 that means a customer has arrived
      at the restaurant and can either be in the queue or at the counter (if cashier is not busy).
-    The function thus returns a boolean True upon customer's arrival.'''
+     The function thus returns a boolean True upon customer's arrival.
+     '''
     Cust = random.randrange(1, 21)
     if Cust == 20:
         return True
@@ -132,7 +133,7 @@ def simulation(numSec, itemsPermin):
 
 def main():
     '''
-    taking a fixed time frame of 600 seconds to visualize simulation
+    taking a fixed time frame of 600 seconds as an example to visualize simulation
     results within this time frame by changing the number of items entered by the cashier (per min).
     '''
     time_frame = 600
